@@ -8,6 +8,7 @@ import {
 } from 'vuex-module-decorators';
 import TokenDataService from '@/services/TokenDataService';
 import Item from '@/assets/js/core/Item';
+import {serverIp} from "@/assets/js";
 
 //Vue.use(Vuex);
 
@@ -120,7 +121,7 @@ class Root extends VuexModule {
         console.log('elo kurwa');
         await axios
             .get(
-                `http://localhost:2000/character/${this.loggedUserData.userId}`,
+                `http://${serverIp}/character/${this.loggedUserData.userId}`,
                 {
                     headers: {
                         Auth: TokenDataService.getAccessToken(),

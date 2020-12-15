@@ -13,6 +13,7 @@
     import axios from 'axios'
     import TokenDataService from '@/services/TokenDataService';
     import { Action, Getter, Mutation } from 'vuex-class';
+    import { serverIp } from "@/assets/js";
 
 
     @Component
@@ -23,7 +24,7 @@
         name: string = ''
 
         async createCharacter () {
-            await axios.post('http://localhost:2000/character/create', {
+            await axios.post(`http://${serverIp}/character/create`, {
                 name: this.name
             }, {
                 headers: {

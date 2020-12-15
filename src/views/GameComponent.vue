@@ -49,9 +49,10 @@
     import TradeRequest from '@/components/TradeRequest.vue';
     import { Watch } from 'vue-property-decorator';
     import Player from '@/assets/js/core/characters/Player';
+    import { serverIp } from "@/assets/js";
 
     // @ts-ignore
-    export const playerSocket: SocketIO.Socket = io('http://localhost:2000')
+    export const playerSocket: SocketIO.Socket = io(`http://159.65.115.115`)
     //export let game: any
 
     @Component({

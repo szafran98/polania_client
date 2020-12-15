@@ -17,6 +17,7 @@
     import Component from 'vue-class-component';
     import TokenDataService from '@/services/TokenDataService';
     import { Mutation, Action, namespace } from 'vuex-class';
+    import {serverIp} from "@/assets/js";
 
     const rootModule = namespace('Root')
 
@@ -32,7 +33,7 @@
         showError = false
 
         login () {
-            axios.post('http://localhost:2000/auth/login', {
+            axios.post(`http://${serverIp}/auth/login`, {
                 username: this.username,
                 password: this.password,
             })

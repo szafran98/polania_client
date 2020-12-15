@@ -35,3 +35,4 @@ document.addEventListener('keydown', (event) => {
 
 export let game: Game;
 export let CTX: any;
+export const serverIp = '159.65.115.115'

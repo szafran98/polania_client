@@ -31,6 +31,7 @@
     import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
     import axios from 'axios'
     import { Mutation } from 'vuex-class';
+    import {serverIp} from "@/assets/js";
 
 
     @Component
@@ -49,7 +50,7 @@
 
         async register() {
             //console.log(this.$v.$touch())
-            await axios.post('http://localhost:2000/user', {
+            await axios.post(`http://${serverIp}/user`, {
                 username: this.username,
                 email: this.email,
                 password: this.password,
