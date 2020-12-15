@@ -34,7 +34,7 @@ export default class Player extends Entity implements IPlayer {
         this.socketId = data.socketId;
         this.visible = true;
         //this.image.src = '../../../../../public/img/admin.png';
-        this.image.src = `http://165.22.18.233/img/${data.imageSrc}`;
+        this.image.src = `http://159.65.115.115/img/${data.imageSrc}`;
 
         console.log(this);
         console.log('at object creation player');

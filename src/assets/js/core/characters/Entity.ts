@@ -31,7 +31,7 @@ export default class Entity {
         this.height = data.height;
         this.visible = data.visible;
         this._group = data._group;
-        this.imageSrc = `http://165.22.18.233/img/${data.imageSrc}`;
+        this.imageSrc = `http://159.65.115.115/img/${data.imageSrc}`;
         this.image.src = data.imageSrc;
 
         this.statistics = new Statistics(data.statistics);
