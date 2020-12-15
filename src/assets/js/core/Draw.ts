@@ -247,7 +247,7 @@ export default class Draw {
     renderItemsOnMap() {
         game.map.itemsOnMap.forEach((itemData) => {
             let itemImage = new Image();
-            itemImage.src = `http://localhost:8080/img/${itemData.item.itemData.imageSrc}`;
+            itemImage.src = `http://165.22.18.233/img/${itemData.item.itemData.imageSrc}`;
 
             this.contextLayer.drawImage(
                 itemImage,
