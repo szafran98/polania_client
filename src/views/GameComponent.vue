@@ -52,7 +52,7 @@
     import { serverIp } from "@/assets/js";
 
     // @ts-ignore
-    export const playerSocket: SocketIO.Socket = io(`http://localhost/server/`)
+    export const playerSocket: SocketIO.Socket = io(`http://159.65.115.115:80/server/`)
     //export let game: any
 
     @Component({
