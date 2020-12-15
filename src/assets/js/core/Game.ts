@@ -11,6 +11,7 @@ import { playerSocket } from '@/views/GameComponent.vue';
 import Trade from '@/assets/js/core/characters/Trade';
 //import { initializeButtonListeners } from '@/assets/js/ui/uiDrawMethods';
 
+
 export default class Game {
     // @ts-ignore
     //private _socket = io('http://localhost:2000');
