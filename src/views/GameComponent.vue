@@ -121,6 +121,10 @@
                 this.isPendingTradeRequest = true
             })
 
+            playerSocket.on('tradeCompleted', () => {
+                this.isPlayerTrading = false
+            })
+
 
             playerSocket.emit('loginOnCharacter', {
                 character: this.character,

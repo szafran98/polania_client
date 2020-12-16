@@ -166,10 +166,14 @@
         }
 
         mounted () {
-            game.socket.on('pickedUpItem', item => {
+            game.socket.on('pickedUpItem', (item: any) => {
                 console.log('pickedUpItem')
                 this.createAndAppendItemImageToBackpack(item)
                 this.setItemDragging(false)
+            })
+
+            game.socket.on('tradeCompleted', () => {
+                this.putItemsInBackpack()
             })
 
 
@@ -177,6 +181,9 @@
                 console.log(this.dressedItems)
                 console.log('dressed items ^^^^^^')
 
+                this.putItemsInBackpack()
+
+                /*
                 let itemsAndPositions = []
                 for (let i in this.dressedItems) {
                     if (this.dressedItems[i] === null || !Array.isArray(this.dressedItems[i])) continue
@@ -198,9 +205,34 @@
                 }
                 this.storeItems(itemsAndPositions)
 
+                 */
+
 
                 this.fieldsMouseEnterListeners()
             }, 501)
+        }
+
+        putItemsInBackpack() {
+            let itemsAndPositions = []
+            for (let i in this.dressedItems) {
+                if (this.dressedItems[i] === null || !Array.isArray(this.dressedItems[i])) continue
+                //console.log(this.dressedItems[i])
+
+                for (let item in this.dressedItems[i]) {
+                    //console.log(this.dressedItems[i][item])
+
+                    if (this.dressedItems[i][item].itemData.imageSrc) {
+                        //console.log(this.dressedItems[i][item])
+
+                        this.createAndAppendItemImageToBackpack(this.dressedItems[i][item])
+
+                        itemsAndPositions.push(this.dressedItems[i][item])
+                        //console.log(this.backpack)
+                    }
+                }
+
+            }
+            this.storeItems(itemsAndPositions)
         }
 
         createAndAppendItemImageToBackpack(item: any) {

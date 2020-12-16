@@ -39,6 +39,7 @@ export default class Trade {
 
     console.log(this);
     this.updateTradeStateListener();
+    this.tradeCompletedListener()
   }
 
   updateTradeStateListener() {
@@ -54,13 +55,10 @@ export default class Trade {
 
   acceptTradeOffer() {
     game.socket.emit("acceptTradeOffer");
-    /*
-    if (this.player1.instance.id === game.player.id) {
-      this.player1.instance.playerSocket.emit("acceptTradeOffer");
-    } else if (this.player2.instance.id === game.player.id) {
-      this.player2.instance.playerSocket.emit("acceptTradeOffer");
-    }
-
-     */
+  }
+  tradeCompletedListener() {
+    game.socket.on('tradeCompleted', () => {
+      game.currentTrade = null
+    })
   }
 }
