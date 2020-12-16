@@ -178,8 +178,6 @@
 
 
             setTimeout(() => {
-                console.log(this.dressedItems)
-                console.log('dressed items ^^^^^^')
 
                 this.putItemsInBackpack()
 
@@ -213,6 +211,9 @@
         }
 
         putItemsInBackpack() {
+            console.log(this.dressedItems)
+            console.log('dressed items ^^^^^^')
+
             let itemsAndPositions = []
             for (let i in this.dressedItems) {
                 if (this.dressedItems[i] === null || !Array.isArray(this.dressedItems[i])) continue
