@@ -173,7 +173,9 @@
             })
 
             game.socket.on('tradeCompleted', () => {
-                this.putItemsInBackpack()
+                setTimeout(() => {
+                    this.putItemsInBackpack()
+                }, 400)
             })
 
 
@@ -211,6 +213,7 @@
         }
 
         putItemsInBackpack() {
+            // TU JEST DOBRZE
             console.log(this.dressedItems)
             console.log('dressed items ^^^^^^')
 
@@ -219,11 +222,12 @@
                 if (this.dressedItems[i] === null || !Array.isArray(this.dressedItems[i])) continue
                 //console.log(this.dressedItems[i])
 
+                console.log(this.dressedItems)
                 for (let item in this.dressedItems[i]) {
                     //console.log(this.dressedItems[i][item])
 
                     if (this.dressedItems[i][item].itemData.imageSrc) {
-                        //console.log(this.dressedItems[i][item])
+
 
                         this.createAndAppendItemImageToBackpack(this.dressedItems[i][item])
 
@@ -234,9 +238,15 @@
 
             }
             this.storeItems(itemsAndPositions)
+
+            // TU JEST DOBRZE
+            console.log(this.dressedItems)
+            console.log('dressed items ^^^^^^')
         }
 
         createAndAppendItemImageToBackpack(item: any) {
+            if (document.getElementById(item.fieldInEquipment)!.childNodes.length !== 0) return
+            console.log('createAndAppendItemImageToBackpack ^^^^')
             let itemImage = new Image()
             itemImage.src = `http://159.65.115.115/img/${item.itemData.imageSrc}`
             itemImage.draggable = true

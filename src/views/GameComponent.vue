@@ -8,7 +8,7 @@
         <div id="scena" class="">
             <Chat v-if="gameInstance" v-bind:game-instance="gameInstance" class="" />
             <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="">
-                <TradeComponent v-if="isPlayerTrading"/>
+                <TradeComponent v-if="isPlayerTrading" v-on:tradeAborted="isPlayerTrading = false"/>
                 <TradeRequest v-if="isPendingTradeRequest" v-bind:secondsToAutomaticDenyTradeRequest="secondsToAutomaticDenyTradeRequest" v-on:stopTradeRequestTimer="stopTradeRequestTimer"/>
                 <div id="combat-timer" class="is-size-2" style="position: absolute; width: 544px; color: black; font-weight: bold"></div>
                 <canvas id="ctx" width="544" height="544" style="border: 1px solid black"></canvas>

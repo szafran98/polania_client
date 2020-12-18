@@ -2,20 +2,20 @@
     <div id="trade-container" style="">
         <div class="card" style="margin: auto; width: fit-content; padding: 2rem">
             <div class="columns" style="">
-                <i class="fas fa-times-circle fa-2x" style="position: absolute; right: -5%; top: -5%; z-index: 10"></i>
+                <i class="fas fa-times-circle fa-2x" style="position: absolute; right: -5%; top: -5%; z-index: 10" @click="exitTrade"></i>
                 <div id="player1-column" class="column card-content">
                     <span style="margin: auto">{{tradeInstance.player1.instance.name}}</span>
                     <div id="player1-trade-field" class="col" style="margin: 30px" @drop.prevent="drop" @dragover.prevent="">
                         <img :src="player1ItemImageSrc" alt="">
                     </div>
-                    <input type="button" class="button" value="Akceptuj" :disabled="tradeInstance.player1.instance.id !== gameInstance.player.id || tradeInstance.player1.isOfferAccepted" @click="acceptTradeOffer">
+                    <input type="button" class="button" value="Akceptuj" :class="{ 'is-success': tradeInstance.player1.isOfferAccepted }" :disabled="tradeInstance.player1.instance.id !== gameInstance.player.id || tradeInstance.player1.isOfferAccepted" @click="acceptTradeOffer">
                 </div>
                 <div id="player2-column" class="column card-content">
                     <span style="margin: auto">{{tradeInstance.player2.instance.name}}</span>
                     <div id="player2-trade-field" class="col" style="margin: 30px" @drop.prevent="drop" @dragover.prevent="">
                         <img :src="player2ItemImageSrc" alt="">
                     </div>
-                    <input type="button" class="button" value="Akceptuj" :disabled="tradeInstance.player2.instance.id !== gameInstance.player.id || tradeInstance.player2.isOfferAccepted" @click="acceptTradeOffer">
+                    <input type="button" class="button" value="Akceptuj" :class="{ 'is-success': tradeInstance.player2.isOfferAccepted }" :disabled="tradeInstance.player2.instance.id !== gameInstance.player.id || tradeInstance.player2.isOfferAccepted" @click="acceptTradeOffer">
                 </div>
             </div>
         </div>
@@ -84,6 +84,11 @@
 
         acceptTradeOffer() {
             this.tradeInstance?.acceptTradeOffer()
+        }
+
+        exitTrade() {
+            //this.$emit('tradeAborted')
+            this.gameInstance.socket.emit('tradeAborted', this.tradeInstance!.id)
         }
 
         drag(event: any) {
