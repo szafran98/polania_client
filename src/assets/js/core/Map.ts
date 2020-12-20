@@ -3,8 +3,9 @@ import {
     ICollisionEntity,
     IEnemy,
     IMapData,
-    IMapWorld,
+    IMapWorld, INpc,
 } from "@/assets/js/Interfaces";
+import Npc from "@/assets/js/core/characters/Npc";
 
 export default class Map {
     collisionMap: ICollisionEntity[] = [];
@@ -18,6 +19,7 @@ export default class Map {
     mapLayersData: number[][] = [];
     world: IMapWorld;
     enemiesOnMap: Enemy[] = [];
+    npcsOnMap: any[] = []
     itemsOnMap: any[];
 
     constructor(mapData: IMapData) {
@@ -27,7 +29,17 @@ export default class Map {
         this.world = mapData.world;
         this.tile_sheet.image.src = mapData.imageSrc;
         this.createEnemies(mapData.enemiesOnMap);
+        this.createNpcs(mapData.npcsOnMap)
         this.itemsOnMap = mapData.itemsOnMap;
+
+        //this.npcsOnMap = mapData.npcsOnMap
+    }
+
+    createNpcs(npcsData: INpc[]): void {
+        npcsData.forEach(npcData => {
+            this.npcsOnMap.push(new Npc(npcData))
+        })
+        console.log(this.npcsOnMap)
     }
 
     createEnemies(enemiesData: IEnemy[]): void {
@@ -110,22 +122,6 @@ export default class Map {
                 //delete this.itemsOnMap[instanceIndex];
             }
         });
-        /*
-        itemsData.forEach((itemData) => {
-            if (this.itemsOnMap.length === 0) {
-                this.itemsOnMap.push(itemData);
-            }
 
-            this.itemsOnMap.forEach((item) => {
-                if (item.id === itemData.id) {
-                    Object.assign(item, itemData);
-                } else {
-                    this.itemsOnMap.push(itemData);
-                }
-            });
-        });
-
-         */
-        //console.log(this.itemsOnMap);
     }
 }

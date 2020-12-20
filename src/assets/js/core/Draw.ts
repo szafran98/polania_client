@@ -202,10 +202,10 @@ export default class Draw {
 
     renderEntities(): void {
         // @ts-ignore
-        let entitiesToDraw: Entity[] = game.playersList.concat(
+        let entitiesToDraw: any[] = game.playersList.concat(
             // @ts-ignore
             game.map.enemiesOnMap
-        );
+        ).concat(game.map.npcsOnMap)
 
         entitiesToDraw.sort((a, b) => {
             return a.y - b.y;
@@ -213,7 +213,7 @@ export default class Draw {
 
         //CTX.shadowColor = 'red';
         //CTX.shadowBlur = 15;
-        entitiesToDraw.forEach((entity: Entity) => {
+        entitiesToDraw.forEach((entity: any) => {
             entity.draw();
         });
         //CTX.shadowColor = '';
