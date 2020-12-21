@@ -3,23 +3,10 @@ import Enemy from '../core/characters/Enemy';
 import Player from '../core/characters/Player';
 //import { showAddToGroupButton } from '../ui/interfaceManipulation';
 import { canvasButtonsColors } from '@/assets/js/ui/uiDrawMethods';
+import Npc from "@/assets/js/core/characters/Npc";
 
 export default class CanvasEventHandler {
     constructor() {
-        //this.enemyClickHandler();
-        //this.enemyMouseOverHandler();
-        //this.playerMouseOverHandler();
-        //this.itemOnGroundMouseOverHandler();
-        //this.getItemFromGroundClickListener();
-        //this.getItemFromGroundMouseOverListener();
-        //this.attackPlayerButtonClickListener();
-        //this.attackPlayerButtonMouseOverListener();
-        //this.addPlayerToGroupButtonClickListener();
-        //this.addPlayerToGroupMouseOverListener();
-        //this.tradeButtonMouseOverListener();
-        //this.playerClickHandler();
-        //this.itemOnGroundClickHandler();
-        //this.tradeWithPlayerButtonClickListener();
 
         this.mouseOverEventHandler();
         this.clickEventHandler();
@@ -41,6 +28,7 @@ export default class CanvasEventHandler {
         CTX.canvas.addEventListener('mousemove', (event: any) => {
             this.enemyMouseOverHandler(event);
             this.playerMouseOverHandler(event);
+            this.npcMouseOverHandler(event)
             this.itemOnGroundMouseOverHandler(event);
             this.getItemFromGroundMouseOverListener(event);
             this.attackPlayerButtonMouseOverListener(event);
@@ -101,6 +89,24 @@ export default class CanvasEventHandler {
             }
         });
         //});
+    }
+
+    npcMouseOverHandler(event: any) {
+        //CTX.canvas.addEventListener('mousemove', (event: MouseEvent) => {
+        game.map.npcsOnMap.forEach((npc: Npc) => {
+            if (
+                event.offsetX - game.draw.margin.horizontal >= npc.x &&
+                event.offsetX - game.draw.margin.horizontal <=
+                npc.x + npc.width &&
+                event.offsetY - game.draw.margin.vertical >= npc.y &&
+                event.offsetY - game.draw.margin.vertical <=
+                npc.y + npc.height
+            ) {
+                npc.guiEvents.mouseOver = true;
+            } else {
+                npc.guiEvents.mouseOver = false;
+            }
+        });
     }
 
     playerMouseOverHandler(event: any) {

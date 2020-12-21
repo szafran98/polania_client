@@ -11,8 +11,9 @@ import {
     entityUiDrawMethodsMain,
     renderHealthBar,
     renderEnemyIsTargetCircle,
-    itemUiDrawMethodsMain,
+    itemUiDrawMethodsMain, npcUiDrawMethodsMain,
 } from '../ui/uiDrawMethods';
+import Npc from "@/assets/js/core/characters/Npc";
 
 export default class Draw {
     contextLayer?: any = document.getElementById('ctx');
@@ -98,6 +99,11 @@ export default class Draw {
         game.map.itemsOnMap.forEach((item: any) => {
             itemUiDrawMethodsMain(item);
         });
+
+        game.map.npcsOnMap.forEach((npc: Npc) => {
+            //npc.guiEvents.mouseOver = true
+            npcUiDrawMethodsMain(npc)
+        })
     }
 
     renderGuiElementsFight(): void {

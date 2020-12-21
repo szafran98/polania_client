@@ -14,6 +14,9 @@ export default class Npc implements INpc {
     conversationOptions: object
     conversationOptionsTree: object
     databaseId: string
+    guiEvents = {
+        mouseOver: false,
+    };
 
     constructor(data: INpc) {
         this.id = data.id

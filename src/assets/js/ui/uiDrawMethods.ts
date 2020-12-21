@@ -3,6 +3,7 @@ import { CTX, game } from '../index';
 import Enemy from '../core/characters/Enemy';
 import Player from '../core/characters/Player';
 import Entity from '../core/characters/Entity';
+import Npc from "@/assets/js/core/characters/Npc";
 
 export function enemyUiDrawMethodsMain(enemy: Enemy) {
     if (enemy.guiEvents.mouseOver) {
@@ -38,6 +39,56 @@ export function itemUiDrawMethodsMain(item: any) {
     if (item.showItemDropDownMenu) {
         showGetItemButton(item);
     }
+}
+
+export function npcUiDrawMethodsMain(npc: Npc) {
+    if (npc.guiEvents.mouseOver) {
+        renderNpcNameHint(npc)
+    }
+}
+
+function renderNpcNameHint(npc: Npc) {
+    CTX.font = '12px serif';
+    CTX.textBaseline = 'top';
+
+    let len = Math.floor(CTX.measureText(npc.name).width);
+
+    CTX.fillStyle = '#52231a';
+    CTX.fillRect(
+        npc.x + game.draw.margin.horizontal - npc.width / 2,
+        npc.y + game.draw.margin.vertical - npc.height / 2,
+        2 * len,
+        30
+    );
+
+    CTX.strokeStyle = '#8f541f';
+    CTX.strokeRect(
+        npc.x + game.draw.margin.horizontal + 2 - npc.width / 2,
+        npc.y + game.draw.margin.vertical - npc.height / 2 + 2,
+        2 * len - 4,
+        30 - 4
+    );
+
+    CTX.fillStyle = '#fff';
+    CTX.fillText(
+        npc.name,
+        npc.x + game.draw.margin.horizontal + len / 2 - npc.width / 2,
+        npc.y + game.draw.margin.vertical - npc.height / 2 + 5
+    );
+
+    /*
+    CTX.font = '10px serif';
+    CTX.fillText(
+        `Lvl: ${entity.statistics._level}`,
+        entity.x +
+        game.draw.margin.horizontal +
+        len / 2 +
+        len / 8 -
+        entity.width / 2,
+        entity.y + game.draw.margin.vertical - entity.height + 15
+    );
+
+     */
 }
 
 function renderEnemyMapCircle(enemy: Enemy) {
