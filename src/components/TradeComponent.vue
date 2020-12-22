@@ -53,7 +53,7 @@
             //if (this.tradeInstance!.player1.offer!.itemData.imageSrc) {
 
             try {
-                return `http://159.65.115.115/img/${this.tradeInstance!.player1.offer!.itemData.imageSrc}`
+                return `http://localhost:8080/img/${this.tradeInstance!.player1.offer!.itemData.imageSrc}`
             } catch (e) {
                 return ''
             }
@@ -63,7 +63,7 @@
 
         get player2ItemImageSrc() {
             try {
-                return `http://159.65.115.115/img/${this.tradeInstance!.player2.offer!.itemData.imageSrc}`
+                return `http://localhost:8080/img/${this.tradeInstance!.player2.offer!.itemData.imageSrc}`
             } catch (e) {
                 return ''
             }

@@ -7,12 +7,11 @@
         -->
         <div id="scena" class="">
             <Chat v-if="gameInstance" v-bind:game-instance="gameInstance" class="" />
-            <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="">
+            <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="" style="display: flex; flex-direction: column; justify-content: space-between">
                 <TradeComponent v-if="isPlayerTrading" v-on:tradeAborted="isPlayerTrading = false"/>
                 <TradeRequest v-if="isPendingTradeRequest" v-bind:secondsToAutomaticDenyTradeRequest="secondsToAutomaticDenyTradeRequest" v-on:stopTradeRequestTimer="stopTradeRequestTimer"/>
-                <div id="combat-timer" class="is-size-2" style="position: absolute; width: 544px; color: black; font-weight: bold"></div>
-                <canvas id="ctx" width="544" height="544" style="border: 1px solid black"></canvas>
-                <div id="ui" class="" style="z-index: -1">
+                <Conversation v-if="isPlayerDoingConversation" v-on:exitConversation="isPlayerDoingConversation = false"/>
+                <div id="ui" class="" style="z-index: -1; height: 150px; position: absolute">
                     <input id="attack-btn" style="    bottom: 125px;
     position: absolute;
     right: 50px;" type="button" value="Atak">
@@ -26,6 +25,8 @@
 
                     </div>
                 </div>
+                <div id="combat-timer" class="is-size-2" style="position: absolute; width: 544px; color: black; font-weight: bold"></div>
+                <canvas id="ctx" width="544" height="544" style="border: 1px solid black"></canvas>
             </div>
             <RightGameColumn v-if="gameInstance" v-bind:gameInstance="gameInstance" />
         </div>
@@ -49,6 +50,7 @@
     import TradeRequest from '@/components/TradeRequest.vue';
     import { Watch } from 'vue-property-decorator';
     import Player from '@/assets/js/core/characters/Player';
+    import Conversation from "@/components/Conversation.vue";
     import { serverIp } from "@/assets/js";
 
     // @ts-ignore
@@ -60,7 +62,8 @@
             RightGameColumn,
             Chat,
             TradeComponent,
-            TradeRequest
+            TradeRequest,
+            Conversation
         }
     })
     export default class GameComponent extends Vue{
@@ -74,6 +77,7 @@
         tradeRequestTimer: any = null
 
         isPlayerTrading = false
+        isPlayerDoingConversation = false
 
         @Watch('isPendingTradeRequest')
         test(value: any, oldValue: any) {
@@ -94,6 +98,19 @@
 
         get dressedItems() {
             return game.player.statistics.equipment
+        }
+
+        get isPlayerTalkWithNpc() {
+            let value
+            try {
+                value = game.isPlayerDoingConversation
+            } finally {
+                if (typeof value !== "undefined") {
+                    return value
+                } else {
+                    return false
+                }
+            }
         }
 
         created () {

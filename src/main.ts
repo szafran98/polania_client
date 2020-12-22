@@ -14,8 +14,10 @@ Vue.use(Vuelidate);
 
 Vue.prototype.$http = axios;
 
-new Vue({
+const vue = new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount("#app");
+
+export { vue }

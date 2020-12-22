@@ -9,6 +9,7 @@ import Group from './characters/Group';
 // @ts-ignore
 import { playerSocket } from '@/views/GameComponent.vue';
 import Trade from '@/assets/js/core/characters/Trade';
+import Npc from "@/assets/js/core/characters/Npc";
 //import { initializeButtonListeners } from '@/assets/js/ui/uiDrawMethods';
 
 
@@ -24,8 +25,10 @@ export default class Game {
     draw: Draw = new Draw();
     public currentFight: Fight | null = null;
     public currentTrade: Trade | null = null;
+    public currentConversationWith: Npc | null = null
     actualScene = Scene.WALK;
     showMiniMap = false;
+    isPlayerDoingConversation = false
 
     pendingTradeRequest = {
         state: false,

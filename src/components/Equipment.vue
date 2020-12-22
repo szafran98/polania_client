@@ -80,7 +80,7 @@
                     if (this.dressedItems[i].itemData.imageSrc && document.getElementById(<string>this.dressedItems[i].fieldInEquipment)!.childNodes.length === 0) {
                         //console.log(this.dressedItems[i].imageSrc)
                         let itemImage = new Image()
-                        itemImage.src = `http://159.65.115.115/img/${this.dressedItems[i].itemData.imageSrc}`
+                        itemImage.src = `http://localhost:8080/img/${this.dressedItems[i].itemData.imageSrc}`
                         itemImage.draggable = true
                         itemImage.setAttribute('id', `item${i}`)
                         itemImage.addEventListener('dragstart', (event) => this.drag(event), false)

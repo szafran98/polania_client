@@ -4,6 +4,7 @@ import Player from '../core/characters/Player';
 //import { showAddToGroupButton } from '../ui/interfaceManipulation';
 import { canvasButtonsColors } from '@/assets/js/ui/uiDrawMethods';
 import Npc from "@/assets/js/core/characters/Npc";
+import { vue } from "@/main";
 
 export default class CanvasEventHandler {
     constructor() {
@@ -20,6 +21,7 @@ export default class CanvasEventHandler {
             this.addPlayerToGroupButtonClickListener(event);
             this.tradeWithPlayerButtonClickListener(event);
             this.playerClickHandler(event);
+            this.npcClickHandler(event)
             this.itemOnGroundClickHandler(event);
         });
     }
@@ -35,6 +37,31 @@ export default class CanvasEventHandler {
             this.addPlayerToGroupMouseOverListener(event);
             this.tradeButtonMouseOverListener(event);
         });
+    }
+
+    npcClickHandler(event: any) {
+        //CTX.canvas.addEventListener('click', (event: MouseEvent) => {
+        //console.log('klik');
+        game.map.npcsOnMap.forEach((npc: Npc) => {
+            console.log(
+                event.offsetY - game.draw.margin.vertical + 12,
+                npc.y + npc.height
+            );
+            if (
+                event.offsetX - game.draw.margin.horizontal + 12 >= npc.x &&
+                event.offsetX - game.draw.margin.horizontal + 12 <=
+                npc.x + npc.width &&
+                event.offsetY - game.draw.margin.vertical + 12 >= npc.y &&
+                event.offsetY - game.draw.margin.vertical + 12 <=
+                npc.y + npc.height
+            ) {
+                // DZIAŁA ALE WIDAĆ JAKI ZJEBANY KOD
+                vue.$children[0].$children[1].$data.isPlayerDoingConversation = true
+                game.currentConversationWith = npc
+                game.isPlayerDoingConversation = true
+            }
+        });
+        //});
     }
 
     enemyClickHandler(event: any) {

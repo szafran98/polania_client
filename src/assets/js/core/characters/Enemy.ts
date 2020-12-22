@@ -10,7 +10,7 @@ export default class Enemy extends Entity implements IEnemy {
         super(data);
         this.spawnTime = data.spawnTime;
         this.databaseId = data.databaseId;
-        this.image.src = `http://159.65.115.115/img/${data.imageSrc}`;
+        this.image.src = `http://localhost:8080/img/${data.imageSrc}`;
     }
 
     get group(): Enemy[] {

@@ -51,7 +51,7 @@
             let sourceImage = new Image()
             sourceImage.crossOrigin = 'anonymous'
             sourceImage.onload = start
-            sourceImage.src = `http://159.65.115.115/img/${this.character.imageSrc}`
+            sourceImage.src = `http://localhost:8080/img/${this.character.imageSrc}`
             //console.log(this.character.imageSrc)
 
         }

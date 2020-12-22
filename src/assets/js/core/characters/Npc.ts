@@ -25,7 +25,7 @@ export default class Npc implements INpc {
         this.y = data.y
         this.width = data.width
         this.height = data.height
-        this.imageSrc = `http://159.65.115.115/img/${data.imageSrc}`;
+        this.imageSrc = `http://localhost:8080/img/${data.imageSrc}`;
         this.image.src = this.imageSrc
         this.conversationOptions = data.conversationOptions
         this.conversationOptionsTree = data.conversationOptionsTree

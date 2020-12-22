@@ -248,7 +248,7 @@
             if (document.getElementById(item.fieldInEquipment)!.childNodes.length !== 0) return
             console.log('createAndAppendItemImageToBackpack ^^^^')
             let itemImage = new Image()
-            itemImage.src = `http://159.65.115.115/img/${item.itemData.imageSrc}`
+            itemImage.src = `http://localhost:8080/img/${item.itemData.imageSrc}`
             itemImage.draggable = true
             itemImage.setAttribute('id', `item${item.itemData.type}`)
             itemImage.addEventListener('dragstart', (event) => this.drag(event), false)
