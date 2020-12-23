@@ -57,6 +57,7 @@
 
     // @ts-ignore
     export const playerSocket: SocketIO.Socket = io(`http://165.22.18.233/`)
+    //export const playerSocket: SocketIO.Socket = io(`http://localhost:2000/`)
     //export let game: any
 
     @Component({

@@ -1,4 +1,4 @@
-import { INpc } from "@/assets/js/Interfaces";
+import {IItem, INpc} from "@/assets/js/Interfaces";
 import {CTX, game} from "@/assets/js";
 
 
@@ -11,6 +11,7 @@ export default class Npc implements INpc {
     height: number;
     image: HTMLImageElement = new Image()
     imageSrc: string
+    offeringItems: IItem[]
     conversationOptions: object
     conversationOptionsTree: object
     databaseId: string
@@ -27,10 +28,12 @@ export default class Npc implements INpc {
         this.height = data.height
         this.imageSrc = `http://localhost:8080/img/${data.imageSrc}`;
         this.image.src = this.imageSrc
+        this.offeringItems = data.offeringItems
         this.conversationOptions = data.conversationOptions
         this.conversationOptionsTree = data.conversationOptionsTree
         this.databaseId = data.databaseId
 
+        console.log(data)
     }
 
     draw() {

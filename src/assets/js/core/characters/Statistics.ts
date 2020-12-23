@@ -1,6 +1,7 @@
-import { IStats } from "@/assets/js/Interfaces";
+
 import { Equipment } from './Equipment';
 import { Statistic } from '../../Enums';
+import {IStats} from "@/assets/js/Interfaces";
 
 export class Statistics {
     _baseStats: IStats = {
@@ -112,10 +113,11 @@ export class Statistics {
         return Statistics.instance;
     }
 
-    get allStatistics() {
-        let combinedStats: IStats = {};
+    get allStatistics() : IStats {
+        let combinedStats: any = {};
 
         Object.values(Statistic).forEach((stat) => {
+            //console.log(stat)
             if (this.equipment.equipmentStats[stat]) {
                 if (stat === Statistic.ATTACK) {
                     combinedStats[stat] = this.equipment.equipmentStats[stat];

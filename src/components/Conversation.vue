@@ -68,5 +68,14 @@
             font-family: 'MedievalSharp', cursive;
             border-bottom: 1px solid #8f541f;
         }
+
+        .conversation-option {
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                background: #F77100;
+            }
+        }
     }
 </style>

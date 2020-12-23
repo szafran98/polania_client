@@ -117,6 +117,7 @@ export interface IItem {
 
 export interface IStats {
     maxHealth?: number;
+    health?: number;
     attack?: number[] | number;
     attackSpeed?: number;
     criticalStrikeChance?: number;
@@ -126,10 +127,10 @@ export interface IStats {
     intellect?: number;
     energy?: number;
     mana?: number;
-    fireResistance?: 0;
-    frostResistance?: 0;
-    lightningResistance?: 0;
-    poisonResistance?: 0;
+    fireResistance: 0;
+    frostResistance: 0;
+    lightningResistance: 0;
+    poisonResistance: 0;
     armor?: number;
     dodge?: number;
     level?: number;
@@ -170,7 +171,7 @@ export interface IEnemy extends IEntity {
     spawnTime: number;
     databaseId: string;
 }
-
+/*
 export interface IStats {
     maxHealth?: number;
     attack?: number[] | number;
@@ -191,6 +192,8 @@ export interface IStats {
     armor?: number;
     dodge?: number;
 }
+
+ */
 
 export interface ICollisionEntity {
     x1: number;
@@ -237,6 +240,7 @@ export interface INpc {
     width: number;
     height: number;
     imageSrc: string;
+    offeringItems: IItem[]
     conversationOptions: object;
     conversationOptionsTree: object;
     databaseId: string
