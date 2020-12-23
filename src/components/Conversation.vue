@@ -20,11 +20,15 @@
         actualNpcAnswer: string | null = null
 
         conversationMethods = {
-            'exitConversation': () => {
+            exitConversation: () => {
                 game.isPlayerDoingConversation = false
                 game.currentConversationWith = null
                 this.$emit('exitConversation')
-                alert('run method')
+                //alert('run method')
+            },
+            tradeWithNpc: () => {
+                alert('trade with npc')
+                this.$emit('tradeWithNpc')
             }
         }
 

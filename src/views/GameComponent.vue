@@ -10,7 +10,8 @@
             <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="" style="display: flex; flex-direction: column; justify-content: space-between">
                 <TradeComponent v-if="isPlayerTrading" v-on:tradeAborted="isPlayerTrading = false"/>
                 <TradeRequest v-if="isPendingTradeRequest" v-bind:secondsToAutomaticDenyTradeRequest="secondsToAutomaticDenyTradeRequest" v-on:stopTradeRequestTimer="stopTradeRequestTimer"/>
-                <Conversation v-if="isPlayerDoingConversation" v-on:exitConversation="isPlayerDoingConversation = false"/>
+                <Conversation v-if="isPlayerDoingConversation" v-on:exitConversation="isPlayerDoingConversation = false" v-on:tradeWithNpc="showVendorWindow = true"/>
+                <Vendor v-if="showVendorWindow" v-on:closeVendorWindow="showVendorWindow = false"/>
                 <div id="ui" class="" style="z-index: -1; height: 150px; position: absolute">
                     <input id="attack-btn" style="    bottom: 125px;
     position: absolute;
@@ -51,6 +52,7 @@
     import { Watch } from 'vue-property-decorator';
     import Player from '@/assets/js/core/characters/Player';
     import Conversation from "@/components/Conversation.vue";
+    import Vendor from "@/components/Vendor.vue";
     import { serverIp } from "@/assets/js";
 
     // @ts-ignore
@@ -63,7 +65,8 @@
             Chat,
             TradeComponent,
             TradeRequest,
-            Conversation
+            Conversation,
+            Vendor
         }
     })
     export default class GameComponent extends Vue{
@@ -78,6 +81,8 @@
 
         isPlayerTrading = false
         isPlayerDoingConversation = false
+
+        showVendorWindow = false
 
         @Watch('isPendingTradeRequest')
         test(value: any, oldValue: any) {
