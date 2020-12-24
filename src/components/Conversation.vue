@@ -3,7 +3,7 @@
         <div id="npc-text" style="height: 100px; background: #D6CCA9; color: black; overflow: scroll" v-if="actualNpcAnswer !== null">
             {{ actualNpcAnswer }}
         </div>
-        <div class="conversation-option" @click="select($event)" v-for="(option, index) in currentConversation.conversationOptions" :key="index">
+        <div class="conversation-option" @click="select(index, $event)" v-for="(option, index) in currentConversation.conversationOptions" :key="index">
             <span :id="'option'+index" class="is-size-7">{{ index }}. {{ option.question }}</span>
         </div>
     </div>
@@ -21,13 +21,15 @@
 
         conversationMethods = {
             exitConversation: () => {
-                game.isPlayerDoingConversation = false
-                game.currentConversationWith = null
-                this.$emit('exitConversation')
+                setTimeout(() => {
+                    game.isPlayerDoingConversation = false
+                    game.currentConversationWith = null
+                    this.$emit('exitConversation')
+                }, 1000)
                 //alert('run method')
             },
             tradeWithNpc: () => {
-                alert('trade with npc')
+                //alert('trade with npc')
                 this.$emit('tradeWithNpc')
             }
         }
@@ -36,12 +38,13 @@
             return game.currentConversationWith
         }
 
-        select(event: any) {
+        select(index: number, event: any) {
             console.log(event.target)
             let conversationOptions = this.currentConversation?.conversationOptions
-            let selectedOptionId: string = event.target.id.charAt(event.target.id.length - 1)
-            //console.log(selectedOptionId)
-            console.log(conversationOptions[selectedOptionId])
+            //let selectedOptionId: string = event.target.id.charAt(event.target.id.length - 1)
+            let selectedOptionId = index
+            console.log(selectedOptionId)
+            console.log(conversationOptions)
             console.log(this.currentConversation?.conversationOptionsTree)
             this.choosedConversationOption = selectedOptionId
             this.actualNpcAnswer = conversationOptions[selectedOptionId].answer

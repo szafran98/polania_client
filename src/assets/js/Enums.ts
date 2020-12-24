@@ -36,6 +36,7 @@ export enum ItemType {
     BOOTS = 'boots',
     RING = 'ring',
     AMULET = 'amulet',
+    CONSUMABLE = 'consumable'
     //BACKPACK = 'backpack',
 }
 

@@ -78,17 +78,68 @@ export function showEquipment(itemObject: IOwnedItem) {
     itemHint.setAttribute('id', 'item-hint');
     itemHint.setAttribute('class', 'item-hint');
     itemHint.innerHTML = `<b style="color: gold">${itemData.name}</b><br>`;
+
     if (typeof itemData.statistics.attack === 'number') {
         itemHint.innerHTML += `<b>Atak ${itemData.statistics.attack}</b><br>`;
     } else if (Array.isArray(itemData.statistics.attack)) {
         // @ts-ignore
         itemHint.innerHTML += `<b>Atak ${itemData.statistics.attack[0]}-${itemData.statistics.attack[1]}</b><br>`;
     }
-    itemHint.innerHTML += `<b>Siła +${itemData.statistics.strength}</b><br>`;
+    if (itemData.statistics.strength) {
+        itemHint.innerHTML += `<b>Siła +${itemData.statistics.strength}</b><br>`;
+    }
+    if (itemData.statistics.dexterity) {
+        itemHint.innerHTML += `<b>Zręczność +${itemData.statistics.dexterity}</b><br>`;
+    }
+    if (itemData.statistics.intellect) {
+        itemHint.innerHTML += `<b>Intelekt +${itemData.statistics.intellect}</b><br>`;
+    }
+    if (itemData.statistics.attackSpeed) {
+        itemHint.innerHTML += `<b>Inicjatywa +${itemData.statistics.attackSpeed}</b><br>`;
+    }
+    if (itemData.statistics.criticalStrikeChance) {
+        itemHint.innerHTML += `<b>Szansa CK +${itemData.statistics.criticalStrikeChance}</b><br>`;
+    }
+    if (itemData.statistics.criticalStrikePower) {
+        itemHint.innerHTML += `<b>Moc CK +${itemData.statistics.criticalStrikePower}</b><br>`;
+    }
+    if (itemData.statistics.armor) {
+        itemHint.innerHTML += `<b>Pancerz +${itemData.statistics.armor}</b><br>`;
+    }
+    if (itemData.statistics.fireResistance) {
+        itemHint.innerHTML += `<b>Odporność <i class="fas fa-fire"></i> +${itemData.statistics.fireResistance}</b><br>`;
+    }
+    if (itemData.statistics.frostResistance) {
+        itemHint.innerHTML += `<b>Odporność <i class="fas fa-snowflake"></i> +${itemData.statistics.frostResistance}</b><br>`;
+    }
+    if (itemData.statistics.lightningResistance) {
+        itemHint.innerHTML += `<b>Odporność <i class="fas fa-bolt"></i> +${itemData.statistics.lightningResistance}</b><br>`;
+    }
+    if (itemData.statistics.poisonResistance) {
+        itemHint.innerHTML += `<b>Odporność <i class="fas fa-skull-crossbones"></i> +${itemData.statistics.poisonResistance}</b><br>`;
+    }
+    if (itemData.statistics.dodge) {
+        itemHint.innerHTML += `<b>Unik +${itemData.statistics.dodge}</b><br>`;
+    }
+    if (itemData.statistics.energy) {
+        itemHint.innerHTML += `<b>Energia +${itemData.statistics.energy}</b><br>`;
+    }
+    if (itemData.statistics.mana) {
+        itemHint.innerHTML += `<b>Mana +${itemData.statistics.mana}</b><br>`;
+    }
+    if (itemData.statistics.health) {
+        itemHint.innerHTML += `<b>Życie +${itemData.statistics.health}</b><br>`;
+    }
+
+
+
     itemHint.innerHTML += `<b>Wymagany poziom: ${itemData.requiredLevel}</b><br>`;
     itemHint.innerHTML += `<b>Klasa: ${itemData.class}</b><br>`;
     itemHint.innerHTML += `<b>Wartość: ${itemData.value}</b>`;
-    itemHint.style.position = 'absolute';
+
+
+    itemHint.style.position = 'fixed';
+    itemHint.style.zIndex = '10';
     itemHint.style.width = 'max-content';
     itemHint.style.backgroundColor = '#52231a';
     itemHint.style.borderColor = '#8f541f';
@@ -97,9 +148,9 @@ export function showEquipment(itemObject: IOwnedItem) {
     itemHint.style.padding = '3px';
     itemHint.style.fontSize = '11px';
     itemHint.style.transform = 'translateX(-30%)';
-    //console.log(document.getElementsByClassName('item-hint'));
+    //console.log(document.getElementsByClassName('itemData-hint'));
     document.getElementById(<string>backpackFieldId)?.appendChild(itemHint);
-    //console.log('created item hint');
+    //console.log('created itemData hint');
     //console.log(backpackFieldId, itemObject);
     document
         .getElementById(<string>backpackFieldId)

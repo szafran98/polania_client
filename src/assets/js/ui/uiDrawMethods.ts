@@ -48,7 +48,8 @@ export function npcUiDrawMethodsMain(npc: Npc) {
 }
 
 function renderNpcNameHint(npc: Npc) {
-    CTX.font = '12px serif';
+    CTX.imageSmoothingEnabled = false
+    CTX.font = '13px Arial serif';
     CTX.textBaseline = 'top';
 
     let len = Math.floor(CTX.measureText(npc.name).width);

@@ -1,13 +1,14 @@
 <template>
     <div id="vendor-container" >
-        <div id="vendor-window" class="card" style="background: #8f541f; width: 300px; height: 350px; margin: auto">
-            <i class="fas fa-times-circle fa-1x" @click="closeVendorWindow" style="z-index: 5; float: right"></i>
-            <div v-for="(item, index) in vendorItems" :key="index" class="vendor-row is-uppercase box" style="display: inline-flex; align-items: center; background: rgb(82, 35, 26); clear: both">
+        <div id="vendor-window" class="card" style="background: #8f541f; width: 300px; height: 350px; margin: auto;">
+
+            <i class="fas fa-times-circle fa-1x" @click="closeVendorWindow" style="z-index: 5; display: block"></i>
+            <div v-for="(item, index) in vendorItems" :key="index" class="vendor-row box" style="display: inline-flex; align-items: center; background: rgb(82, 35, 26); clear: both">
                 <div @mouseenter="addItemHint(item, $event)" @mouseleave="removeItemHint(item, $event)">
                     <img :src="`http://localhost:8080/img/`+item.imageSrc" alt="" style="width: 32px; height: 32px; margin: 10px">
                 </div>
                 <span style="margin: 10px; color: white">Cena: {{item.value}} <i class="fas fa-coins" style="color: gold"></i></span>
-                <input type="button" class="button" value="Kup" style="margin: 10px">
+                <input type="button" class="button" value="Kup" @click="buyItem(item)" style="margin: 10px">
             </div>
             <div id="vendor-buttons-container" class="card" style="position: absolute; bottom: 0; width: inherit; background: rgb(82, 35, 26); padding: 10px">
                 <input type="button" class="button" value="Zakupy" style="margin-right: 5px">
@@ -28,6 +29,10 @@
 
         get vendorItems() {
             return game.currentConversationWith?.offeringItems
+        }
+
+        buyItem(item: IItem) {
+            game.socket.emit('buyItem', item)
         }
 
         closeVendorWindow() {
@@ -116,6 +121,7 @@
 
 
             itemHint.style.position = 'fixed';
+            itemHint.style.zIndex = '10'
             itemHint.style.width = 'max-content';
             itemHint.style.backgroundColor = '#52231a';
             itemHint.style.borderColor = '#8f541f';

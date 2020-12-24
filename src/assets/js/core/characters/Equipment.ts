@@ -13,7 +13,7 @@ export class Equipment {
 
     backpack: IOwnedItem[] = [];
 
-    constructor(ownedItems: any[]) {
+    constructor(ownedItems: IOwnedItem[]) {
         //console.log(ownedItems);
         if (Object.keys(ownedItems).length === 0) return;
         //console.log(Object.keys(ownedItems).length === 0);
@@ -25,6 +25,7 @@ export class Equipment {
                 //console.log(ownedItems[i]);
                 if (ownedItems[i] instanceof Array) return;
                 let ownedItem: IOwnedItem = {
+                    id: ownedItems[i].id,
                     itemData: new Item(ownedItems[i].itemData),
                     fieldInEquipment: ownedItems[i].fieldInEquipment,
                 };
@@ -48,8 +49,8 @@ export class Equipment {
          */
     }
 
-    get equipmentStats() {
-        let statsSum: IStats = {};
+    get equipmentStats() : IStats {
+        let statsSum = {};
 
         Object.values(this).forEach((item: IOwnedItem | IOwnedItem[]) => {
             if (item === null || item instanceof Array) return;
@@ -68,6 +69,6 @@ export class Equipment {
                 }
             });
         });
-        return statsSum;
+        return <IStats>statsSum;
     }
 }

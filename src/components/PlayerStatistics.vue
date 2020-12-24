@@ -16,15 +16,15 @@
             </div>
         </div>
         <div id="col3" class="is-size-7 is-flex is-justify-content-center" style="display: flex; margin: auto">
-            <span style="padding: 10px">Siła {{ allStatistics.strength }} </span>
-            <span style="padding: 10px">Zręczność {{ allStatistics.dexterity }} </span>
-            <span style="padding: 10px">Intelekt {{ allStatistics.intellect }}</span>
+            <span style="padding: 10px">STR {{ allStatistics.strength }} </span>
+            <span style="padding: 10px">DEX {{ allStatistics.dexterity }} </span>
+            <span style="padding: 10px">INT {{ allStatistics.intellect }}</span>
         </div>
         <div id="col4" class="is-size-7 is-flex is-justify-content-center" style="display: flex; margin: auto">
-            <span style="padding: 10px"> <i class="fas fa-fire" style="color: #F77100"></i> {{ allStatistics.fireResistance }} </span>
-            <span style="padding: 10px"> <i class="fas fa-snowflake" style="color: #2478B9"></i> {{ allStatistics.frostResistance }} </span>
-            <span style="padding: 10px"> <i class="fas fa-bolt" style="color: #F1C40F"></i> {{ allStatistics.lightningResistance }}</span>
-            <span style="padding: 10px"> <i class="fas fa-skull-crossbones" style="color: #63DC15"></i>  {{ allStatistics.poisonResistance }}</span>
+            <span class="has-tooltip-bottom" style="padding: 10px; border: 0" :data-tooltip="allStatistics.fireResistance + ' %'"> <i class="fas fa-fire" style="color: #F77100"></i></span>
+            <span class="has-tooltip-bottom" style="padding: 10px; border: 0" :data-tooltip="allStatistics.frostResistance + ' %'"> <i class="fas fa-snowflake" style="color: #2478B9"></i>  </span>
+            <span class="has-tooltip-bottom" style="padding: 10px; border: 0" :data-tooltip="allStatistics.lightningResistance + ' %'"> <i class="fas fa-bolt" style="color: #F1C40F"></i> </span>
+            <span class="has-tooltip-bottom" style="padding: 10px; border: 0" :data-tooltip="allStatistics.poisonResistance + ' %'"> <i class="fas fa-skull-crossbones" style="color: #63DC15"></i> </span>
         </div>
     </div>
 </template>
@@ -54,5 +54,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .box {
+        margin-bottom: 0 !important;
+    }
 </style>

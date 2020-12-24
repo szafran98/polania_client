@@ -1,5 +1,5 @@
 <template>
-    <div id="qeuipment-container" class="box" style="margin-top: 20px; background: #52231a; color: white">
+    <div id="equipment-container" class="box" style="margin-top: 20px; background: #52231a; color: white; height: 188px">
         <div id="eq-row-1" class="row is-flex is-align-content-center">
             <div id="helmet" class="col" @drop.prevent="drop" @dragover.prevent="" style="margin: auto;">
 
@@ -193,5 +193,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .box {
+        margin-bottom: 0 !important;
+    }
 </style>

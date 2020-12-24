@@ -144,12 +144,12 @@
 <script lang="ts">
     import Vue from 'vue'
     import Component from 'vue-class-component';
-    import { Getter, Mutation } from 'vuex-class';
-    import { IOwnedItem } from '../../../Interfaces';
-    import { game } from '@/assets/js';
-    import { Prop, Watch } from 'vue-property-decorator';
-    import { showEquipment } from '@/assets/js/ui/interfaceManipulation';
-    import { Equipment } from '@/assets/js/core/characters/Equipment';
+    import {Getter, Mutation} from 'vuex-class';
+    import {IOwnedItem} from "@/assets/js/Interfaces";
+    import {game} from '@/assets/js';
+    import {showEquipment} from '@/assets/js/ui/interfaceManipulation';
+    import {Equipment} from '@/assets/js/core/characters/Equipment';
+    import {ItemType} from "@/assets/js/Enums";
 
     @Component
     export default class Backpack extends Vue {
@@ -170,6 +170,24 @@
                 console.log('pickedUpItem')
                 this.createAndAppendItemImageToBackpack(item)
                 this.setItemDragging(false)
+            })
+
+            game.socket.on('putBoughtItemInBackpack', (item: IOwnedItem) => {
+                this.createAndAppendItemImageToBackpack(item)
+            })
+
+            game.socket.on('removeConsumedItemFromBackpack', (item: IOwnedItem) => {
+                console.log('elo kurwawrarwarawrawrwawraarw')
+                let itemInField = <HTMLElement>document.getElementById(`item-${item.id}`)
+                //let itemHint = <HTMLElement>document.getElementById('item-hint')
+                console.log(itemInField)
+                try {
+                    let itemHint = <HTMLElement>document.getElementById('item-hint')
+                    document.getElementById(<string>item.fieldInEquipment)!.removeChild(itemHint)
+                } finally {
+                    document.getElementById(<string>item.fieldInEquipment)!.removeChild(itemInField)
+                }
+
             })
 
             game.socket.on('tradeCompleted', () => {
@@ -250,8 +268,9 @@
             let itemImage = new Image()
             itemImage.src = `http://localhost:8080/img/${item.itemData.imageSrc}`
             itemImage.draggable = true
-            itemImage.setAttribute('id', `item${item.itemData.type}`)
+            itemImage.setAttribute('id', `item-${item.id}`)
             itemImage.addEventListener('dragstart', (event) => this.drag(event), false)
+            itemImage.addEventListener('dblclick', (event) => this.dbclick(event), false)
             document.getElementById(<string>item.fieldInEquipment)!.appendChild(itemImage)
         }
 
@@ -283,7 +302,19 @@
         }
 
 
+        dbclick(event: any) {
 
+            let itemField = event.target!.parentElement.id
+
+            let clickedItem = game.player.statistics.equipment.backpack.find(itemInstance => itemInstance.fieldInEquipment === itemField)
+            if (clickedItem) {
+                if (clickedItem.itemData.type === ItemType.CONSUMABLE) {
+                    game.socket.emit('doItemDbClickAction', clickedItem.id)
+                }
+            }
+
+            console.log(itemField)
+        }
 
         drag(event: any) {
             //this.isItemDragging = true
@@ -316,13 +347,14 @@
                 //if (item !== 'backpack') continue
                 if (this.dressedItems[item] === null) continue
 
-                console.log(this.dressedItems)
+                //console.log(this.dressedItems)
 
                 // PRZENIESIENIE POMIĘDZY FIELDAMI W PLECAKU
                 if (imageParent.includes('field') && isFieldEmpty) {
                     for (let itemInBackpack in this.dressedItems[item]) {
                         if (this.dressedItems[item][itemInBackpack].fieldInEquipment === imageParent) {
 
+                            console.log(this.dressedItems[item][itemInBackpack])
                             // @ts-ignore
                             game.socket.emit('dragItem', {
                                 actualField: this.dressedItems[item][itemInBackpack].fieldInEquipment,
@@ -367,6 +399,7 @@
 <style lang="scss">
     #backpack-container {
         margin: auto;
+        width: fit-content;
     }
 
     .col {

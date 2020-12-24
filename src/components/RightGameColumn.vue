@@ -2,9 +2,9 @@
     <div id="right-column" v-if="isPlayerDataLoaded">
         <div id="name-div" class="is-size-5" style="color: black">
             <span>{{ gameInstance.player.name }}</span>
-            <span>Poziom {{ gameInstance.player.statistics._level }}</span>
+            <span class="is-size-7">Poziom {{ gameInstance.player.statistics._level }}</span>
         </div>
-        <div class="heal-and-exp-bars">
+        <div class="heal-and-exp-bars" style="margin-bottom: 15px">
             <div id="health-bar-background" class="bar-background">
                 <div id="health-bar-color" class="bar" ></div>
             </div>
@@ -14,7 +14,7 @@
         </div>
         <PlayerStatistics v-show="!showEquipment" />
         <Equipment v-show="showEquipment" />
-        <input type="button" value="EQ" @click="showEquipment = !showEquipment">
+        <input type="button" class="button is-small" value="EQ" @click="showEquipment = !showEquipment">
         <Backpack v-if="gameInstance" />
     </div>
 </template>
