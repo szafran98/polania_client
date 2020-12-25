@@ -1,8 +1,8 @@
 <template>
     <div id="right-column" v-if="isPlayerDataLoaded">
-        <div id="name-div" class="is-size-5" style="color: black">
-            <span>{{ gameInstance.player.name }}</span>
-            <span class="is-size-7">Poziom {{ gameInstance.player.statistics._level }}</span>
+        <div id="name-div" class="is-size-5" style="display: grid">
+            <span id="player-name">{{ gameInstance.player.name }}</span>
+            <span class="is-size-7" style="border-bottom: 1px solid black">Poziom {{ gameInstance.player.statistics._level }}</span>
         </div>
         <div class="heal-and-exp-bars" style="margin-bottom: 15px">
             <div id="health-bar-background" class="bar-background">
@@ -84,6 +84,48 @@
         width: 250px;
         background: #8f541f;
 
+        #name-div {
+            background: rgb(82, 35, 26);
+            color: white;
+        }
+
+        #health-bar-background {
+            background: #ddd;
+        }
+        #exp-bar-color {
+            background: gold;
+
+        }
+
+        .bar-background {
+            height: 15px;
+            width: 230px;
+            background: #ddd;
+            position: relative;
+            margin: auto;
+            margin-top: 10px;
+            //padding: 5px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            box-shadow: 3px 3px #2c3e50;
+
+            .bar {
+                background: #c54;
+                //width: 100%;
+                height: 13px;
+                position: relative;
+
+                transition: width .5s linear;
+            }
+        }
+    }
+
+    /*
+    #right-column {
+        height: 544px;
+        width: 250px;
+        background: #8f541f;
+
         #exp-bar-color {
             background: gold;
 
@@ -114,9 +156,8 @@
             }
         }
 
+     */
 
-        #name-div {
-            display: grid;
-        }
-    }
+
+
 </style>

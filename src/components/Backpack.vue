@@ -400,11 +400,17 @@
     #backpack-container {
         margin: auto;
         width: fit-content;
+        background: rgb(82, 35, 26);
+        box-shadow: 3px 3px #2c3e50;
     }
 
     .col {
         width: 32px;
         height: 32px;
         border: 1px solid black;
+
+        &:hover {
+            box-shadow: inset 0 0 15px #2c3e50;
+        }
     }
 </style>

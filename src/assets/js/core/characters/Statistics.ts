@@ -93,6 +93,8 @@ export class Statistics {
     }
 
     public static createOrUpdate(updateData: any): Statistics {
+        //console.log(updateData.equipment)
+
         if (!Statistics.instance) {
             Statistics.instance = new Statistics(updateData);
         } else if (Statistics.instance) {
@@ -100,14 +102,8 @@ export class Statistics {
             Statistics.instance._level = updateData._level;
             Statistics.instance._baseStats = updateData._baseStats;
             Statistics.instance._experience = updateData._experience;
-            //Statistics.instance.equipment = new Equipment(updateData.equipment);
-            //Statistics.instance.equipment = new Equipment(updateData.equipment);
             Object.assign(Statistics.instance.equipment, updateData.equipment);
-            //console.log(Statistics.instance.equipment.backpack);
-            //Statistics.instance._baseStats.maxHealth = Statistics.instance.calculateMaxHealth();
-            //console.log(Statistics.instance.equipment);
-            //console.log(Statistics.instance.calculateMaxHealth());
-            //Statistics.instance. = updateData._experience
+
         }
 
         return Statistics.instance;
@@ -117,16 +113,18 @@ export class Statistics {
         let combinedStats: any = {};
 
         Object.values(Statistic).forEach((stat) => {
-            //console.log(stat)
+            //console.log(this.equipment)
             if (this.equipment.equipmentStats[stat]) {
                 if (stat === Statistic.ATTACK) {
                     combinedStats[stat] = this.equipment.equipmentStats[stat];
+                    //console.log('case 1')
                 } else {
                     combinedStats[stat] =
                         <number>this._baseStats[stat] +
                         <number>this.equipment.equipmentStats[stat];
                 }
             } else {
+                //console.log('case 2')
                 combinedStats[stat] = <number>this._baseStats[stat];
             }
         });

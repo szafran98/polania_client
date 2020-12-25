@@ -277,11 +277,15 @@ export default class Fight {
                     }
 
                     if (entity.id === entityData.id) {
-                        entity.statistics = new Statistics(
-                            entityData.statistics
-                        );
-                        entity.statistics._health =
-                            entityData.statistics._health;
+                        if (entity === game.player) {
+                            Statistics.createOrUpdate(entityData.statistics)
+                        } else {
+                            entity.statistics = new Statistics(
+                                entityData.statistics
+                            );
+                            entity.statistics._health =
+                                entityData.statistics._health;
+                        }
                     }
                 });
             });

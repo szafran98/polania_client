@@ -1,27 +1,30 @@
 <template>
-    <div id="equipment-container" class="box" style="margin-top: 20px; background: #52231a; color: white; height: 188px">
+    <div id="equipment-container" class="box" style="background: #52231a; color: white; height: 199px">
         <div id="eq-row-1" class="row is-flex is-align-content-center">
             <div id="helmet" class="col" @drop.prevent="drop" @dragover.prevent="" style="margin: auto;">
 
             </div>
         </div>
 
-        <div id="eq-row-2" class="row is-flex" style="width: 64px; margin: auto">
-            <div id="amulet" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
+        <div id="eq-row-2" class="row is-flex" style="width: 100px; margin: auto">
+            <div id="ring" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
-            <div id="gloves" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
+            <div id="amulet" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
+
+            </div>
+            <div id="gloves" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
         </div>
-        <div id="eq-row-3" class="row is-flex" style="width: 96px; margin: auto">
-            <div id="weapon" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
+        <div id="eq-row-3" class="row is-flex" style="width: 100px; margin: auto">
+            <div id="weapon" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
-            <div id="armor" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
+            <div id="armor" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
-            <div id="ring" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
+            <div id="2nd-hand" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
         </div>
@@ -195,5 +198,13 @@
 <style lang="scss" scoped>
     .box {
         margin-bottom: 0 !important;
+        border-radius: 0 !important;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-style: ridge;
+
+        .col {
+            margin: 1px;
+        }
     }
 </style>

@@ -1,15 +1,16 @@
 <template>
-    <div class="statistics-container box has-text-weight-bold" style="margin-top: 20px; background: #52231a; color: white">
+    <div class="statistics-container box has-text-weight-bold" style="background: #52231a; color: white">
+        <span id="player-gold"><i class="fas fa-coins" style="color: gold"></i> 1000 </span>
         <div class="statistics-card is-flex is-flex-direction-row is-align-items-flex-end">
             <div id="col1" class="is-size-7 is-flex is-flex-direction-column is-align-items-start" style="display: grid">
-                <span v-if="Array.isArray(allStatistics.attack)">Atak: {{ `${allStatistics.attack[0]} - ${allStatistics.attack[1]}` }}</span>
-                <span v-else>Atak: {{ `${allStatistics.attack}` }}</span>
-                <span>Szansa na krytyk: {{ allStatistics.criticalStrikeChance+'%' }}</span>
-                <span>Moc krytyka: {{ '+'+allStatistics.criticalStrikePower+'%' }}</span>
+                <span v-if="Array.isArray(allStatistics.attack)"><span class="iconify" data-icon="jam:sword-f" data-inline="false"></span> {{ `${allStatistics.attack[0]} - ${allStatistics.attack[1]}` }}</span>
+                <span v-else><span class="iconify" data-icon="jam:sword-f" data-inline="false"></span>: {{ `${allStatistics.attack}` }}</span>
+                <span>Szansa CK: {{ allStatistics.criticalStrikeChance+'%' }}</span>
+                <span>Moc CK: {{ '+'+allStatistics.criticalStrikePower+'%' }}</span>
                 <span>Inicjatywa: {{ allStatistics.attackSpeed }}</span>
             </div>
-            <div id="col2" class="is-size-7 is-flex is-flex-direction-column is-align-items-flex-start" style="width: 40%; padding-left: 15px">
-                <span>Pancerz: {{ allStatistics.armor }}</span>
+            <div id="col2" class="is-size-7 is-flex is-flex-direction-column is-align-items-flex-start">
+                <span><span class="iconify" data-icon="bi:shield-shaded" data-inline="false"></span> {{ allStatistics.armor }}</span>
                 <span>Mana: {{ allStatistics.mana }}</span>
                 <span>Energia: {{ allStatistics.energy }}</span>
                 <span>Unik: {{ allStatistics.dodge+'%' }}</span>
@@ -17,7 +18,7 @@
         </div>
         <div id="col3" class="is-size-7 is-flex is-justify-content-center" style="display: flex; margin: auto">
             <span style="padding: 10px">STR {{ allStatistics.strength }} </span>
-            <span style="padding: 10px">DEX {{ allStatistics.dexterity }} </span>
+            <span style="padding: 10px;">DEX {{ allStatistics.dexterity }} </span>
             <span style="padding: 10px">INT {{ allStatistics.intellect }}</span>
         </div>
         <div id="col4" class="is-size-7 is-flex is-justify-content-center" style="display: flex; margin: auto">
@@ -40,15 +41,25 @@
     export default class PlayerStatistics extends Vue {
         //@Prop() readonly statistics!: Statistics
 
+        /*
+        get allStatistics() {
+            return game.player.statistics.allStatistics
+        }
+        */
+
+
         allStatistics = game.player.statistics.allStatistics
 
         mounted () {
             setInterval(() => {
                 this.allStatistics = game.player.statistics.allStatistics
-                //console.log(this.allStatistics)
+                if (game.currentFight) {
+                    //console.log(this.allStatistics)
+                }
             }, 1000)
 
         }
+
 
     }
 </script>
@@ -56,5 +67,59 @@
 <style lang="scss" scoped>
     .box {
         margin-bottom: 0 !important;
+        border-radius: 0 !important;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 0;
+        padding-bottom: 0;
+        border-style: double;
+        //margin: auto;
+
+        .statistics-card {
+            //margin-top: 20px;
+        }
+
+
+        #col1 {
+            background: #8f541f;
+            width: 50%;
+            position: relative;
+
+            .iconify {
+                vertical-align: middle;
+                width: 15px;
+                height: 15px;
+            }
+
+            span {
+                border: 1px solid black;
+                width: 100%;
+                position: relative;
+                padding: 2px;
+            }
+        }
+
+        #col2 {
+            background: #8f541f;
+            width: 50%;
+            position: relative;
+
+            .iconify {
+                vertical-align: middle;
+                width: 20px;
+                height: 15px;
+            }
+
+            span {
+                border: 1px solid black;
+                width: 100%;
+                position: relative;
+                padding: 2px;
+            }
+        }
+
+        #col3 {
+            border-bottom: 1px solid black;
+        }
     }
 </style>
