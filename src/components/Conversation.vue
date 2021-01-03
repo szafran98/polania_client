@@ -1,6 +1,6 @@
 <template>
-    <div id="conversation-container" class="is-size-5" style="margin-top: 344px; position: absolute; z-index: 4;background: rgb(82, 35, 26); color: white">
-        <div id="npc-text" style="height: 100px; background: #D6CCA9; color: black; overflow: scroll" v-if="actualNpcAnswer !== null">
+    <div id="conversation-container" class="is-size-5">
+        <div id="npc-text" v-if="actualNpcAnswer !== null">
             {{ actualNpcAnswer }}
         </div>
         <div class="conversation-option" @click="select(index, $event)" v-for="(option, index) in currentConversation.conversationOptions" :key="index">
@@ -64,10 +64,18 @@
     #conversation-container {
         width: 544px;
         height: 200px;
-        background: white;
         font-weight: bold;
+        margin-top: 344px;
+        position: absolute;
+        z-index: 4;
+        background: rgb(82, 35, 26);
+        color: white;
 
         #npc-text {
+            height: 100px;
+            background: #D6CCA9;
+            color: black;
+            overflow: scroll;
             font-family: 'MedievalSharp', cursive;
             border-bottom: 1px solid #8f541f;
         }

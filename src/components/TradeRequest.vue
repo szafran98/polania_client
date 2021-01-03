@@ -1,8 +1,8 @@
 <template>
     <div id="trade-request-container">
-        <div class="card" style="display: grid; padding: 20px; margin: auto; width: fit-content;">
+        <div class="card">
             <span>{{requestByPlayerName}} chce się z tobą wymienić.</span>
-            <div style="display: flex; width: max-content; margin: auto">
+            <div id="trade-request-btns-container">
                 <input type="button" class="button" value="Akceptuj" style="width: fit-content; margin: 20px" @click="acceptTrade">
                 <input type="button" class="button" value="Odrzuć" style="width: fit-content; margin: 20px">
             </div>
@@ -49,5 +49,13 @@
         position: absolute;
         margin: auto;
         width: 544px;
+
+        #trade-request-btns-container {
+            display: flex; width: max-content; margin: auto;
+        }
+
+        .card {
+            display: grid; padding: 20px; margin: auto; width: fit-content;
+        }
     }
 </style>

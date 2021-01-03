@@ -1,14 +1,14 @@
 <template>
     <div id="right-column" v-if="isPlayerDataLoaded">
-        <div id="name-div" class="is-size-5" style="display: grid">
+        <div id="name-div" class="is-size-5">
             <span id="player-name">{{ gameInstance.player.name }}</span>
-            <span class="is-size-7" style="border-bottom: 1px solid black">Poziom {{ gameInstance.player.statistics._level }}</span>
+            <span id="player-level" class="is-size-7">Poziom {{ gameInstance.player.statistics._level }}</span>
         </div>
-        <div class="heal-and-exp-bars" style="margin-bottom: 15px">
+        <div class="heal-and-exp-bars">
             <div id="health-bar-background" class="bar-background">
                 <div id="health-bar-color" class="bar" ></div>
             </div>
-            <div id="exp-bar-background" class="bar-background" style="">
+            <div id="exp-bar-background" class="bar-background">
                 <div id="exp-bar-color" class="bar"></div>
             </div>
         </div>
@@ -83,10 +83,23 @@
         height: 544px;
         width: 250px;
         background: #8f541f;
+        border: 1px solid black;
+        border-top: 2px double white;
+        border-right: 2px double white;
+        border-bottom: 2px double white;
 
         #name-div {
             background: rgb(82, 35, 26);
             color: white;
+            display: grid;
+
+            #player-level {
+                border-bottom: 1px solid black;
+            }
+        }
+
+        .heal-and-exp-bars {
+            margin-bottom: 15px;
         }
 
         #health-bar-background {
@@ -119,45 +132,6 @@
             }
         }
     }
-
-    /*
-    #right-column {
-        height: 544px;
-        width: 250px;
-        background: #8f541f;
-
-        #exp-bar-color {
-            background: gold;
-
-        }
-
-        .bar-background {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            width: 200px;
-            height: 20px;
-            padding: 5px;
-            background: #ddd;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            position: relative;
-            margin: auto;
-            margin-top: 10px;
-
-            .bar {
-                background: #c54;
-                //width: 100%;
-                height: 10px;
-                position: relative;
-
-                transition: width .5s linear;
-            }
-        }
-
-     */
-
 
 
 </style>

@@ -22,6 +22,7 @@ export default class Player extends Entity implements IPlayer {
     socketId: string;
 
     showPlayerDropDownMenu = false;
+    gold: number;
 
     constructor(data: IPlayer) {
         super(data);
@@ -35,6 +36,7 @@ export default class Player extends Entity implements IPlayer {
         this.visible = true;
         //this.image.src = '../../../../../public/img/admin.png';
         this.image.src = `http://localhost:8080/img/${data.imageSrc}`;
+        this.gold = data.gold;
 
         console.log(this);
         console.log('at object creation player');
@@ -91,6 +93,7 @@ export default class Player extends Entity implements IPlayer {
                     data.statistics
                 );
                 game.player.currentDirection = data.currentDirection;
+                game.player.gold = data.gold
                 //console.log(data);
             }
         }

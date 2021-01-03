@@ -28,7 +28,8 @@ export const stopGameMain = function (game: Game) {
 };
 
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'm' && document.activeElement !== chatInput) {
+    if (event.key === 'm' && document.activeElement !== document.getElementById('chat-input')) {
+        console.log(document.activeElement)
         game!.showMiniMap = !game!.showMiniMap;
     }
 });

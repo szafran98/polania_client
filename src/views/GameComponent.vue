@@ -7,27 +7,14 @@
         -->
         <div id="scena" class="">
             <Chat v-if="gameInstance" v-bind:game-instance="gameInstance" class="" />
-            <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="" style="display: flex; flex-direction: column; justify-content: space-between">
+            <div class="canvas-div" @drop.prevent="drop" @dragover.prevent="">
                 <TradeComponent v-if="isPlayerTrading" v-on:tradeAborted="isPlayerTrading = false"/>
                 <TradeRequest v-if="isPendingTradeRequest" v-bind:secondsToAutomaticDenyTradeRequest="secondsToAutomaticDenyTradeRequest" v-on:stopTradeRequestTimer="stopTradeRequestTimer"/>
                 <Conversation v-if="isPlayerDoingConversation" v-on:exitConversation="isPlayerDoingConversation = false" v-on:tradeWithNpc="showVendorWindow = true"/>
                 <Vendor v-if="showVendorWindow" v-on:closeVendorWindow="showVendorWindow = false"/>
-                <div id="ui" class="" style="z-index: -1; height: 150px; position: absolute">
-                    <input id="attack-btn" style="    bottom: 125px;
-    position: absolute;
-    right: 50px;" type="button" value="Atak">
-                    <input id="move-btn" style="    bottom: 75px;
-    position: absolute;
-    right: 50px;" type="button" value="Krok">
-                    <input id="exitBtn" style="    bottom: 25px;
-    position: absolute;
-    right: 50px;" type="button" value="Koniec">
-                    <div id="fight-log" style="width: 400px; height: 150px; overflow-y: scroll">
-
-                    </div>
-                </div>
-                <div id="combat-timer" class="is-size-2" style="position: absolute; width: 544px; color: black; font-weight: bold"></div>
-                <canvas id="ctx" width="544" height="544" style="border: 1px solid black"></canvas>
+                <FightBar v-show="showFightBar"/>
+                <CombatTimer v-if="showFightBar"/>
+                <canvas id="ctx" width="544" height="544" style=""></canvas>
             </div>
             <RightGameColumn v-if="gameInstance" v-bind:gameInstance="gameInstance" />
         </div>
@@ -53,6 +40,8 @@
     import Player from '@/assets/js/core/characters/Player';
     import Conversation from "@/components/Conversation.vue";
     import Vendor from "@/components/Vendor.vue";
+    import FightBar from "@/components/FightBar.vue";
+    import CombatTimer from '@/components/CombatTimer.vue'
     import { serverIp } from "@/assets/js";
 
     // @ts-ignore
@@ -67,7 +56,9 @@
             TradeComponent,
             TradeRequest,
             Conversation,
-            Vendor
+            Vendor,
+            FightBar,
+            CombatTimer
         }
     })
     export default class GameComponent extends Vue{
@@ -84,6 +75,7 @@
         isPlayerDoingConversation = false
 
         showVendorWindow = false
+        showFightBar = false
 
         @Watch('isPendingTradeRequest')
         test(value: any, oldValue: any) {
@@ -148,6 +140,14 @@
                 this.isPlayerTrading = false
             })
 
+            playerSocket.on('beginCombat', () => {
+                this.showFightBar = true
+            })
+
+            playerSocket.on('combatEnded', () => {
+                this.showFightBar = false
+            })
+
 
             playerSocket.emit('loginOnCharacter', {
                 character: this.character,
@@ -204,14 +204,13 @@
 
 <style lang="scss" scoped>
     #scena {
-        //width: 544px;
         height: 544px;
-        //position: relative;
-        //border: 2px solid black;
         display: flex;
 
         .canvas-div {
-            //height: 544px;
+            border-top: 2px double white;
+            border-bottom: 2px double white;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
 
 
@@ -219,10 +218,7 @@
             width: 544px;
             text-align: center;
             position: relative;
-            bottom: 23vh;
-            //left: 50%;
-            //display: inline-block;
-            //transform: translateX(-50%);
+            bottom: 85px;
         }
     }
     #ctx { z-index: 3; width: 544px; height: 544px;}

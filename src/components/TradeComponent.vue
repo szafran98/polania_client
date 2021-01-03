@@ -1,8 +1,8 @@
 <template>
-    <div id="trade-container" style="">
-        <div class="card" style="margin: auto; width: fit-content; padding: 2rem">
-            <div class="columns" style="">
-                <i class="fas fa-times-circle fa-2x" style="position: absolute; right: -5%; top: -5%; z-index: 10" @click="exitTrade"></i>
+    <div id="trade-container">
+        <div class="card">
+            <div class="columns">
+                <i id="exit-trade-btn" class="fas fa-times-circle fa-2x" @click="exitTrade"></i>
                 <div id="player1-column" class="column card-content">
                     <span style="margin: auto">{{tradeInstance.player1.instance.name}}</span>
                     <div id="player1-trade-field" class="col" style="margin: 30px" @drop.prevent="drop" @dragover.prevent="">
@@ -176,5 +176,13 @@
         position: absolute;
         margin: auto;
         width: 544px;
+
+        #exit-trade-btn {
+            position: absolute; right: -5%; top: -5%; z-index: 10;
+        }
+
+        .card {
+            margin: auto; width: fit-content; padding: 2rem;
+        }
     }
 </style>

@@ -1,23 +1,23 @@
 <template>
-    <div id="equipment-container" class="box" style="background: #52231a; color: white; height: 199px">
+    <div id="equipment-container" class="box">
         <div id="eq-row-1" class="row is-flex is-align-content-center">
             <div id="helmet" class="col" @drop.prevent="drop" @dragover.prevent="" style="margin: auto;">
 
             </div>
         </div>
 
-        <div id="eq-row-2" class="row is-flex" style="width: 100px; margin: auto">
-            <div id="ring" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
+        <div id="eq-row-2" class="row is-flex">
+            <div id="ring" class="col" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
-            <div id="amulet" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
+            <div id="amulet" class="col" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
             <div id="gloves" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
         </div>
-        <div id="eq-row-3" class="row is-flex" style="width: 100px; margin: auto">
+        <div id="eq-row-3" class="row is-flex">
             <div id="weapon" class="col" style="" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
@@ -28,7 +28,7 @@
 
             </div>
         </div>
-        <div id="eq-row-4" class="row is-flex" style="margin: auto;">
+        <div id="eq-row-4" class="row is-flex">
             <div id="boots" class="col" style="margin: auto;" @drop.prevent="drop" @dragover.prevent="">
 
             </div>
@@ -196,6 +196,22 @@
 </script>
 
 <style lang="scss" scoped>
+    #equipment-container {
+        background: #52231a;
+        color: white;
+        height: 199px;
+
+        #eq-row-2 {
+            width: 100px; margin: auto
+        }
+        #eq-row-3 {
+            width: 100px; margin: auto
+        }
+        #eq-row-4 {
+            margin: auto;
+        }
+    }
+
     .box {
         margin-bottom: 0 !important;
         border-radius: 0 !important;

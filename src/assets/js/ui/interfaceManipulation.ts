@@ -23,29 +23,37 @@ function isInside(pos, rect) {
 
 export function setFightModeInterface() {
     // @ts-ignore
-    document.getElementById('ui').style.backgroundColor = 'white';
+    //document.getElementById('ui').style.backgroundColor = 'white';
     // @ts-ignore
-    document.getElementById('ui').style.zIndex = '4';
+    //document.getElementById('ui').style.zIndex = '4';
     // @ts-ignore
-    document.getElementById('ctx').style.zIndex = '1';
+    //document.getElementById('ctx').style.zIndex = '1';
 }
 
 export function setWalkModeInterface() {
     // @ts-ignore
-    document.getElementById('ui').style.backgroundColor = 'white';
+    //document.getElementById('ui').style.backgroundColor = 'white';
     // @ts-ignore
-    document.getElementById('ui').style.zIndex = '-1';
+    //document.getElementById('ui').style.zIndex = '-1';
     // @ts-ignore
-    document.getElementById('ctx').style.zIndex = '3';
+    //document.getElementById('ctx').style.zIndex = '3';
     // @ts-ignore
     //document.getElementById('body')?.focus()
-    document.getElementById('attack-btn')?.blur();
+    //document.getElementById('attack-btn')?.blur();
 }
 
-export function addRowToFightLog(damage: number, who: string) {
+export function addRowToFightLog(damage: number, who: string, whoType: string) {
     let msg = document.createElement('div');
     msg.style.height = 20 + 'px';
     msg.innerText = `${who} zadał ${damage} obrażeń`;
+    if (whoType === 'player') {
+        msg.style.backgroundColor = '#0A3301'
+    } else {
+        msg.style.backgroundColor = '#78140C'
+    }
+    msg.style.textAlign = 'left'
+    msg.style.margin = '2px'
+    msg.style.borderRadius = '2px'
     document.getElementById('fight-log')?.appendChild(msg);
 }
 

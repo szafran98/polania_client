@@ -166,7 +166,13 @@ export default class Fight {
             'fightLogData',
             (data: { damage: number; name: string; fightId: number }) => {
                 if (this.fightId !== data.fightId) return;
-                addRowToFightLog(data.damage, data.name);
+                let attacker = this.attackQueue.find(attacker => attacker.name === data.name)
+                // TRZEBA SPRAWDZIĆ CZY JEST W DRUŻYNIE GRACZA ALE TERAZ MI SIE NIE CHCE
+                if (attacker instanceof Player) {
+                    addRowToFightLog(data.damage, data.name, 'player');
+                } else if (attacker instanceof Enemy) {
+                    addRowToFightLog(data.damage, data.name, 'enemy');
+                }
             }
         );
     }

@@ -96,25 +96,6 @@ class Root extends VuexModule {
         this.selectedCharacter = character;
     }
 
-    /*
-    @MutationAction({ mutate: ['userCharacters'] })
-    async getUserCharacters(): Promise<any> {
-        axios
-            .get(
-                `http://localhost:2000/character/${this.loggedUserData.userId}`,
-                {
-                    headers: {
-                        Auth: TokenDataService.getAccessToken(),
-                    },
-                }
-            )
-            .then((res) => {
-                console.log(res);
-                return res.data.characters;
-            });
-    }
-
-     */
 
     @Action({ rawError: true })
     async getUserCharacters() {
@@ -140,44 +121,3 @@ class Root extends VuexModule {
 }
 
 export default Root;
-
-/*
-export default new Vuex.Store({
-    state: {
-        loggedUserData: {
-            userId: null,
-            username: null,
-        },
-        userCharacters: [],
-    },
-    mutations: {
-        setLoggedUserData(state, userData) {
-            state.loggedUserData = userData;
-        },
-        storeUserCharacters(state, characters) {
-            characters.forEach((character: any) => {
-                state.userCharacters.push(character);
-            });
-        },
-    },
-    actions: {
-        getUserCharacters({ commit, dispatch, state }) {
-            axios
-                .get(
-                    `http://localhost:2000/character/${state.loggedUserData.userId}`,
-                    {
-                        headers: {
-                            Auth: TokenDataService.getAccessToken(),
-                        },
-                    }
-                )
-                .then((res) => {
-                    commit('storeUserCharacters', res.data.characters);
-                });
-        },
-    },
-    modules: {},
-});
-
-
- */

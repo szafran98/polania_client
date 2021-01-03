@@ -4,7 +4,9 @@
         <h1 v-if="userData.userId && !characters" id="character-info" class="is-centered is-size-2">Brak postaci</h1>
         <div v-if="userData.userId && (!characters || characters.length <= 3)" class="columns column is-centered">
             <div class="column is-2">
-                <input type="button" class="button" value="Nowa postać" @click="showCharacterCreationForm =! showCharacterCreationForm">
+                <input type="button" class="button" value="Nowa postać"
+                       @click="showCharacterCreationForm =! showCharacterCreationForm"
+                />
             </div>
         </div>
         <div v-if="showCharacterCreationForm" class="columns column is-centered">
@@ -99,7 +101,5 @@ const rootModule = namespace('Root')
 
     #game-title-header {
         color: black;
-        //font-size: 2.4vw;
-        //horiz-align: center;
     }
 </style>
