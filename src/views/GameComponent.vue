@@ -45,8 +45,8 @@
     import { serverIp } from "@/assets/js";
 
     // @ts-ignore
-    export const playerSocket: SocketIO.Socket = io(`http://165.22.18.233/`)
-    //export const playerSocket: SocketIO.Socket = io(`http://localhost:2000/`)
+    //export const playerSocket: SocketIO.Socket = io(`http://165.22.18.233/`)
+    export const playerSocket: SocketIO.Socket = io(`http://localhost:2000/`)
     //export let game: any
 
     @Component({
@@ -150,12 +150,12 @@
 
 
             playerSocket.emit('loginOnCharacter', {
-                character: this.character,
+                characterId: this.character.id,
                 token: TokenDataService.getAccessToken()
             })
             startGameMain().then(() => {
                 this.gameInstance = game
-                game.draw.setStartingCameraMargin();
+                //game.draw.setStartingCameraMargin();
             })
 
         }
@@ -217,7 +217,7 @@
         #ui {
             width: 544px;
             text-align: center;
-            position: relative;
+            //position: relative;
             bottom: 85px;
         }
     }

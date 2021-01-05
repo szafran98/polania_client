@@ -110,9 +110,11 @@ class Root extends VuexModule {
                 }
             )
             .then((res) => {
+                console.log(res)
+
                 this.context.commit(
                     'storeUserCharactersData',
-                    res.data.characters
+                    res.data
                 );
                 //const characters = res.data.characters;
                 //return characters;
