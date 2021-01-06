@@ -10,6 +10,7 @@ import Group from "./characters/Group";
 import { playerSocket } from "@/views/GameComponent.vue";
 import Trade from "@/assets/js/core/characters/Trade";
 import Npc from "@/assets/js/core/characters/Npc";
+import * as expToLevelTable from "./exp_table.json";
 //import { initializeButtonListeners } from '@/assets/js/ui/uiDrawMethods';
 
 export default class Game {
@@ -33,6 +34,8 @@ export default class Game {
     state: false,
     requestPlayerName: "",
   };
+
+  expToLevelTable = expToLevelTable;
 
   private static instance: Game;
 

@@ -2,7 +2,7 @@
     <div id="right-column" v-if="isPlayerDataLoaded">
         <div id="name-div" class="is-size-5">
             <span id="player-name">{{ gameInstance.player.name }}</span>
-            <span id="player-level" class="is-size-7">Poziom {{ gameInstance.player.statistics._level }}</span>
+            <span id="player-level" class="is-size-7">Poziom {{ playerLevel }} {{gameInstance.player.class[0]}}</span>
         </div>
         <div class="heal-and-exp-bars">
             <div id="health-bar-background" class="bar-background">
@@ -43,12 +43,15 @@
         showEquipment = true
         isPlayerDataLoaded = false
 
+        playerLevel: number = 1
+
         mounted () {
             setInterval(() => {
                 if (this.gameInstance.player) {
                     this.isPlayerDataLoaded = true
                 }
                 //this.gameInstance = game
+                this.playerLevel = this.gameInstance.player.statistics._level
                 this.setHealthBar()
                 this.setExpBar()
             }, 100)
@@ -67,7 +70,11 @@
         }
 
         setExpBar () {
-            let expToNextLevel = 20
+            //console.log(String(this.gameInstance.player.statistics._level))
+            //@ts-ignore
+            //console.log(game.expToLevelTable['default'])
+            //@ts-ignore
+            let expToNextLevel = game.expToLevelTable['default'][this.gameInstance.player.statistics._level + 1]
             let actualPlayerExp = this.gameInstance.player.statistics._experience
             let actualPercentOfExp = actualPlayerExp / expToNextLevel * 100
             setTimeout(() => {

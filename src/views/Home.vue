@@ -10,7 +10,7 @@
             </div>
         </div>
         <div v-if="showCharacterCreationForm" class="columns column is-centered">
-            <div class="column is-2">
+            <div class="column is-3">
                 <CharacterCreationForm v-on:closeCharacterCreationForm="showCharacterCreationForm = false"/>
             </div>
         </div>

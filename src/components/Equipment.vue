@@ -163,7 +163,10 @@
                 if (imageParent.includes('field') && isFieldEmpty) {
                     for (let itemInBackpack in this.dressedItems[item]) {
 
-                        console.log(this.dressedItems[item])
+                        if (Item.canItemBeDressedByPlayer(this.dressedItems[item][itemInBackpack]).length > 0) {
+                            break
+                        }
+                        //console.log(this.dressedItems[item])
                         // @ts-ignore
                         if (event.target.id.includes(this.dressedItems[item][itemInBackpack].itemData.type)) {
 
